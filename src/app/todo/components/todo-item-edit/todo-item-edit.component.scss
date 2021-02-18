@@ -1,0 +1,22 @@
+form {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1rem;
+
+  button {
+    margin-right: 0.5rem;
+    padding: 0 0.5rem;
+    @media screen and (min-width: 768px) {
+      font-size: 0.75rem;
+      padding: 0 1rem;
+    }
+  }
+
+  input, textarea {
+    font-size: 1rem;
+  }
+
+  div {
+    margin-top: 1rem;
+  }
+}

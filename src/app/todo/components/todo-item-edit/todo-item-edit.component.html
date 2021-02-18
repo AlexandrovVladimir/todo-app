@@ -1,0 +1,24 @@
+<form [formGroup]="editForm">
+  <label>
+    <input type="text"
+           placeholder="Name"
+           formControlName="name">
+  </label>
+  <label>
+    <textarea class="materialize-textarea"
+              placeholder="Description"
+              formControlName="description">
+    </textarea>
+  </label>
+  <div>
+    <button type="button" class="btn"
+            [disabled]="f.invalid"
+            (click)="submit()">
+      Save
+    </button>
+    <button type="button" class="btn red"
+            (click)="cancel()">
+      Cancel
+    </button>
+  </div>
+</form>

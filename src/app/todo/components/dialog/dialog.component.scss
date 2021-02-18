@@ -1,0 +1,15 @@
+.dialog {
+  &__title {
+    font-size: 1rem;
+  }
+
+  &-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+
+    button {
+      margin: 0.5rem;
+    }
+  }
+}

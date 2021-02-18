@@ -1,0 +1,13 @@
+<div class="todo-widget">
+  <div class="todo-widget-container">
+    <div class="todo-widget__title">Todo List</div>
+    <app-todo-list [todoList]="todoList$ | async"
+                   (deleteItem)="onDelete($event)"
+                   (editItem)="onEdit($event)"
+                   (toggleItem)="onToggle($event)">
+    </app-todo-list>
+    <div class="todo-widget__text" *ngIf="!(todoList$ | async).length">
+      Todo List is empty!
+    </div>
+  </div>
+</div>

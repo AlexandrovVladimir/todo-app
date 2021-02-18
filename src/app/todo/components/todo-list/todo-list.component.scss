@@ -1,0 +1,32 @@
+.todo-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem auto 2rem;
+  max-width: 500px;
+
+  &__row {
+    flex: 0 0 100%;
+    margin-bottom: 1rem;
+    position: relative;
+
+    .helper-text {
+      position: absolute;
+      bottom: -1rem;
+      left: 0;
+      color: rgba(185,41,19,0.95);
+    }
+  }
+
+  &__btn {
+    margin-top: 1rem;
+  }
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 0 auto;
+}

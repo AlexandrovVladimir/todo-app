@@ -1,0 +1,44 @@
+<form class="todo-form" [formGroup]="form">
+  <label class="todo-form__row">
+    <input type="text"
+           class="todo-form__control"
+           placeholder="Add name"
+           formControlName="name">
+    <span class="helper-text"
+          *ngIf="f.get('name').invalid && f.get('name').touched">
+      Todo name is required
+    </span>
+  </label>
+
+  <label class="todo-form__row">
+    <textarea class="materialize-textarea todo-form__control"
+              placeholder="Add description"
+              formControlName="description">
+    </textarea>
+  </label>
+
+  <div class="todo-form__row">
+    <button class="btn todo-form__btn"
+            type="submit"
+            [disabled]="f.invalid"
+            (click)="submit()">
+      Add
+    </button>
+  </div>
+</form>
+
+<div class="todo-list">
+  <ng-container *ngFor="let todo of todoList">
+    <app-todo-item [todo]="todo"
+                   *ngIf="!editIds.includes(todo.id)"
+                   (deleteEvent)="delete($event)"
+                   (editEvent)="editMode($event)"
+                   (toggleEvent)="toggle(todo.id)">
+    </app-todo-item>
+    <app-todo-item-edit *ngIf="editIds.includes(todo.id)"
+                        [todo]="todo"
+                        (cancelEvent)="cancel(todo.id)"
+                        (editEvent)="edit($event, todo.id)">
+    </app-todo-item-edit>
+  </ng-container>
+</div>
