@@ -15,7 +15,8 @@ import { Subject } from 'rxjs';
 })
 export class TodoListComponent implements OnInit, OnDestroy {
   @Output() deleteItem = new EventEmitter<number>();
-  @Output() toggleItem = new EventEmitter<number>();
+  @Output() toggleCompletedItem = new EventEmitter<number>();
+  @Output() toggleFavouriteItem = new EventEmitter<number>();
   @Output() editItem = new EventEmitter();
   @Input() todoList: TodoModel[];
   form: FormGroup;
@@ -69,8 +70,12 @@ export class TodoListComponent implements OnInit, OnDestroy {
     this.editIds = this.editIds.filter(itemId => itemId !== id);
   }
 
-  toggle(id: number) {
-    this.toggleItem.emit(id);
+  toggleCompleted(id: number) {
+    this.toggleCompletedItem.emit(id);
+  }
+
+  toggleFavourite(id: number) {
+    this.toggleFavouriteItem.emit(id);
   }
 
   ngOnDestroy(): void {

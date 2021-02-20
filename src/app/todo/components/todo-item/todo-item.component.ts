@@ -9,7 +9,8 @@ import { TodoModel } from '../../models/todo.model';
 export class TodoItemComponent implements OnInit {
   @Output() deleteEvent = new EventEmitter<number>();
   @Output() editEvent = new EventEmitter<number>();
-  @Output() toggleEvent = new EventEmitter<void>();
+  @Output() toggleCompletedEvent = new EventEmitter<void>();
+  @Output() toggleFavouriteEvent = new EventEmitter<void>();
   @Input() todo: TodoModel;
 
   constructor() { }
@@ -25,8 +26,12 @@ export class TodoItemComponent implements OnInit {
     this.editEvent.emit(this.todo.id);
   }
 
-  toggle(event: MouseEvent) {
-    this.toggleEvent.emit();
+  toggleCompleted(event: MouseEvent) {
+    this.toggleCompletedEvent.emit();
+  }
+
+  toggleFavourite() {
+    this.toggleFavouriteEvent.emit();
   }
 
   get isExpired() {

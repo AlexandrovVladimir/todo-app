@@ -6,4 +6,5 @@ export interface TodoModel {
   createdAt: string | object;
   completedAt?: string | object;
   expireDate?: string | object;
+  favourite: boolean;
 }

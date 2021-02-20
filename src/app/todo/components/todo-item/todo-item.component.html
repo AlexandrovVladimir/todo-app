@@ -1,18 +1,21 @@
-<div class="todo-item" [class.todo-item--expired]="isExpired">
+<div class="todo-item"
+     [class.todo-item--expired]="isExpired"
+     [class.todo-item--favourite]="todo.favourite">
   <label>
     <input type="checkbox"
            [checked]="todo.completed"
-           (click)="toggle($event)"/>
+           (click)="toggleCompleted($event)"/>
     <span class="todo-item__name"
           [class.todo-item__name--through]="todo.completed">
       {{ todo.name }}
     </span>
   </label>
-  <span class="todo-item-info">
+  <div class="todo-item-info">
+    <span class="material-icons todo-item__favourite" (click)="toggleFavourite()">favorite_border</span>
     <span class="material-icons todo-item__remove" (click)="delete()">clear</span>
     <span class="material-icons todo-item__edit" (click)="edit()">edit</span>
-  </span>
-  <span class="todo-item--completed" *ngIf="todo.completedAt">
+  </div>
+  <div class="todo-item--completed" *ngIf="todo.completedAt">
     Completed at: {{ todo.completedAt | date : 'medium' }}
-  </span>
+  </div>
 </div>

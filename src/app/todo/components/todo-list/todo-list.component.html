@@ -33,7 +33,8 @@
                    *ngIf="!editIds.includes(todo.id)"
                    (deleteEvent)="delete($event)"
                    (editEvent)="editMode($event)"
-                   (toggleEvent)="toggle(todo.id)">
+                   (toggleCompletedEvent)="toggleCompleted(todo.id)"
+                   (toggleFavouriteEvent)="toggleFavourite(todo.id)">
     </app-todo-item>
     <app-todo-item-edit *ngIf="editIds.includes(todo.id)"
                         [todo]="todo"

@@ -1,8 +1,15 @@
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { Injectable } from '@angular/core';
 
-import { CreateTodoItem, DeleteTodoItem, EditTodoItem, GetTodo, ToggleTodoItem } from './todo.actions';
+import {
+  CreateTodoItem,
+  DeleteTodoItem,
+  EditTodoItem,
+  GetTodo,
+  ToggleCompletedTodoItem, ToggleFavouriteTodoItem,
+} from './todo.actions';
 import { TodoModel } from '../../models/todo.model';
+import { v4 as uniqId } from 'uuid';
 
 export interface TodoStateModel {
   idIncrement: number,
@@ -12,7 +19,7 @@ export interface TodoStateModel {
 @State<TodoStateModel>({
   name: 'TodoState',
   defaults: {
-    idIncrement: 1,
+    idIncrement: uniqId(),
     todoList: []
   }
 })
@@ -37,7 +44,7 @@ export class TodoState {
     const state = getState();
     setState({
       ...state,
-      idIncrement: state.idIncrement + 1,
+      idIncrement: uniqId(),
       todoList: [
         ...state.todoList,
         {
@@ -46,10 +53,11 @@ export class TodoState {
           description: payload.description,
           completed: false,
           createdAt: new Date(),
-          expireDate: new Date(new Date().setDate(new Date().getDate() + 1))
+          expireDate: new Date(new Date().setDate(new Date().getDate() + 1)),
+          favourite: false
         }
       ]
-    })
+    });
   }
 
   @Action(DeleteTodoItem)
@@ -74,8 +82,8 @@ export class TodoState {
     });
   }
 
-  @Action(ToggleTodoItem)
-  toggleTodoItem({ getState, setState }: StateContext<TodoStateModel>, { id }: ToggleTodoItem) {
+  @Action(ToggleCompletedTodoItem)
+  toggleCompletedTodoItem({ getState, setState }: StateContext<TodoStateModel>, { id }: ToggleCompletedTodoItem) {
     const state = getState();
     setState({
       ...state,
@@ -83,6 +91,18 @@ export class TodoState {
         ...todo,
         completed: !todo.completed,
         completedAt: !todo.completed ? new Date() : null
+      } : todo)
+    });
+  }
+
+  @Action(ToggleFavouriteTodoItem)
+  toggleFavouriteTodoItem({ getState, setState }: StateContext<TodoStateModel>, { id }: ToggleFavouriteTodoItem) {
+    const state = getState();
+    setState({
+      ...state,
+      todoList: state.todoList.map(todo => todo.id === id ? {
+        ...todo,
+        favourite: !todo.favourite,
       } : todo)
     });
   }

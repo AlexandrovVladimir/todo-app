@@ -28,8 +28,15 @@ export class EditTodoItem {
   }
 }
 
-export class ToggleTodoItem {
-  static readonly type = '[Todo] Toggle Todo Item';
+export class ToggleCompletedTodoItem {
+  static readonly type = '[Todo] Toggle Completed Todo Item';
+
+  constructor(public id: number) {
+  }
+}
+
+export class ToggleFavouriteTodoItem {
+  static readonly type = '[Todo] Toggle Favourite Todo Item';
 
   constructor(public id: number) {
   }

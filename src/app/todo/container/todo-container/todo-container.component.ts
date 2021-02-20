@@ -3,7 +3,12 @@ import { Select, Store } from '@ngxs/store';
 import { TodoState } from '../../store/todo/todo.state';
 import { Observable, Subject } from 'rxjs';
 import { TodoModel } from '../../models/todo.model';
-import { DeleteTodoItem, EditTodoItem, GetTodo, ToggleTodoItem } from '../../store/todo/todo.actions';
+import {
+  DeleteTodoItem,
+  EditTodoItem,
+  GetTodo,
+  ToggleCompletedTodoItem, ToggleFavouriteTodoItem,
+} from '../../store/todo/todo.actions';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -30,6 +35,7 @@ export class TodoContainerComponent implements OnInit {
     this.todoList$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(todo => {
+        console.log(todo);
         localStorage.setItem('todo', JSON.stringify(todo))
       });
   }
@@ -42,7 +48,11 @@ export class TodoContainerComponent implements OnInit {
     this.store.dispatch(new EditTodoItem(id, values));
   }
 
-  onToggle(id: number) {
-    this.store.dispatch(new ToggleTodoItem(id));
+  onToggleCompleted(id: number) {
+    this.store.dispatch(new ToggleCompletedTodoItem(id));
+  }
+
+  onToggleFavourite(id: number) {
+    this.store.dispatch(new ToggleFavouriteTodoItem(id));
   }
 }
